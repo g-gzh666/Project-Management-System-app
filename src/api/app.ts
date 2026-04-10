@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '@/api/apiBase';
 import http from './http';
 
 export interface ApiResp<T> {
@@ -64,7 +65,7 @@ export const matchResumeStreamApi = async (
   params: { resumeId: string; jobId: string },
   onChunk: (chunk: string) => void
 ) => {
-  const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+  const baseUrl = API_BASE_URL;
   const token = localStorage.getItem('app_token') || '';
   const clientid = localStorage.getItem('app_clientid') || import.meta.env.VITE_APP_CLIENT_ID || 'web_app';
   const search = new URLSearchParams({
@@ -142,7 +143,7 @@ export const matchResumeStreamApi = async (
 export const parseResumeStreamApi = async (file: File, onChunk: (chunk: string) => void, resumeId?: number) => {
   const form = new FormData();
   form.append('file', file);
-  const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+  const baseUrl = API_BASE_URL;
   const token = localStorage.getItem('app_token') || '';
   const clientid = localStorage.getItem('app_clientid') || import.meta.env.VITE_APP_CLIENT_ID || 'web_app';
   const url = `${baseUrl}/user/jianli/resume/parse${resumeId ? `?resumeId=${Number(resumeId)}` : ''}`;

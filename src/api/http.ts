@@ -1,11 +1,12 @@
 import axios from 'axios';
+import { API_BASE_URL } from '@/api/apiBase';
 import { useAuthStore } from '@/stores/auth';
 import JSONbig from 'json-bigint';
 
 const jsonBig = JSONbig({ storeAsString: true });
 
 const http = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
+  baseURL: API_BASE_URL,
   timeout: 30000,
   transformResponse: [
     (data) => {
